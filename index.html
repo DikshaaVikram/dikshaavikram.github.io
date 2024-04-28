@@ -1,96 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nutrition Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <style>
-    /* Add your CSS styles here */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
+import React from "react"
+import Layout from "../components/layout"
+import Seo from "../components/seo"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import LeftIcon from "../images/left-icon.svg"
+import RightIcon from "../images/right-icon.svg"
+import styled from "styled-components"
+
+const StyledDiv = styled.div`
+  & h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  & h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2.2;
+  }
+  & h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 2;
+  }
+  & h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 2;
+  }
+  & a {
+    color: #6b46c1;
+  }
+`
+const BlogPost = props => {
+  const { pageContext } = props
+  const nextSlug = pageContext.next ? pageContext.next.fields.slug : "/"
+  const previousSlug = pageContext.previous
+    ? pageContext.previous.fields.slug
+    : "/"
+  const nextLinkStatus = pageContext.next
+    ? pageContext.next.frontmatter.templateKey === "blog-post"
+      ? true
+      : false
+    : false
+  const previousLinkStatus = pageContext.previous
+    ? pageContext.previous.frontmatter.templateKey === "blog-post"
+      ? true
+      : false
+    : false
+
+  const post = props.data.markdownRemark
+  let date = new Date(post.frontmatter.date) // assuming post.frontmatter.date is in ISO string format
+  let options = { year: "numeric", month: "short", day: "numeric" }
+  let formattedDate = date.toLocaleDateString("en-US", options)
+  let titlaDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
+  let isoDate = date.toISOString().split("T")[0] // get the date part of the ISO string
+
+  return (
+    <Layout>
+      <Seo
+        title="Blog"
+        description="We have been providing professional repair services in the city since 1993 ,and we have helped thousands of local car owners to restore their vehicles."
+      />
+      <main className="pt-8 pb-16 lg:pt-16 lg:pb-24">
+        <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
+          <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+            <header className="mb-4 lg:mb-6 not-format">
+              <h1 className="mb-4 text-3xl font-extrabold leading-tight text-[#000000] lg:mb-6 lg:text-4xl dark:text-black">
+                {post.frontmatter.title}
+              </h1>
+            </header>
+            {post.frontmatter.featuredimage && (
+              <div className="post-content-image">
+                <GatsbyImage
+                  image={getImage(post.frontmatter.featuredimage)}
+                  className="lg:mb-2 overflow-hidden rounded-xl"
+                  alt={post.frontmatter.title}
+                />
+              </div>
+            )}
+            <p className="text-base text-gray-500 dark:text-gray-400 lg:mb-2">
+              <time dateTime={isoDate} title={titlaDate}>
+                {formattedDate}
+              </time>
+            </p>
+
+            <StyledDiv
+              className="post-content-body text-[#000000]"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
+            <div className="flex items-center justify-between pt-8">
+              <div>
+                <a
+                  style={{
+                    display: previousLinkStatus ? "flex" : "none",
+                    alignItems: "center",
+                    color: "#131313",
+                  }}
+                  className="text-base	"
+                  href={previousSlug}
+                >
+                  <img src={LeftIcon} alt="LeftIcon" width={30} height={30} />
+                  <span>
+                    {pageContext.previous
+                      ? pageContext.previous.frontmatter.title?.length > 30
+                        ? pageContext.previous.frontmatter.title.slice(0, 30) +
+                          "..."
+                        : pageContext.previous.frontmatter.title
+                      : ""}
+                  </span>
+                </a>
+              </div>
+              <div>
+                <a
+                  style={{
+                    display: nextLinkStatus ? "flex" : "none",
+                    alignItems: "center",
+                    color: "#131313",
+                  }}
+                  className="text-base	"
+                  href={nextSlug}
+                >
+                  <span>
+                    {pageContext.next
+                      ? pageContext?.next?.frontmatter?.title?.length > 30
+                        ? pageContext?.next?.frontmatter?.title?.slice(0, 30) +
+                          "..."
+                        : pageContext?.next?.frontmatter?.title
+                      : ""}
+                  </span>
+                  <img src={RightIcon} alt="RightIcon" width={30} height={30} />
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+    </Layout>
+  )
+}
+
+export default BlogPost
+
+export const pageQuery = graphql`
+  query BlogPostBySlug($slug: String!) {
+    site {
+      siteMetadata {
+        title
+      }
     }
-    header {
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      id
+      html
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        description
+        featuredimage {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+      }
     }
-    nav {
-      background-color: #34495e;
-      color: #fff;
-      padding: 10px;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-    }
-    main {
-      padding: 20px;
-    }
-    section {
-      margin-bottom: 40px;
-    }
-    footer {
-      background-color: #2c3e50;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Nutrition Portfolio</h1>
-  </header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#work">Work</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Introduce yourself and your expertise in the field of nutrition.</p>
-    </section>
-    <section id="services">
-      <h2>Services</h2>
-      <ul>
-        <li>List the services you offer related to nutrition</li>
-        <li>Meal planning</li>
-        <li>Nutritional counseling</li>
-        <li>etc.</li>
-      </ul>
-    </section>
-    <section id="work">
-      <h2>My Work</h2>
-      <p>Showcase your previous work, case studies, or client testimonials.</p>
-    </section>
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2023 Nutrition Portfolio. All rights reserved.</p>
-    <div>
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </footer>
-</body>
-</html>
+  }
+`
