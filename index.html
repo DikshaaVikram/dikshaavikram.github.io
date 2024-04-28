@@ -1,127 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sassy Nutrition Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <style>
-    /* Add your CSS styles here */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #F9F9F9;
-    }
-    header {
-      background-color: #FF6D6D;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    nav {
-      background-color: #FF9C9C;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      transition: all 0.3s ease-in-out;
-    }
-    nav a:hover {
-      background-color: #FF6D6D;
-      border-radius: 5px;
-    }
-    main {
-      padding: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    section {
-      margin-bottom: 40px;
-      padding: 20px;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
-    footer {
-      background-color: #FF6D6D;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Animation styles */
-    .animate__animated {
-      animation-duration: 1s;
-      animation-fill-mode: both;
-    }
-    .animate__fadeInUp {
-      animation-name: fadeInUp;
-    }
-    .animate__fadeInDown {
-      animation-name: fadeInDown;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1 class="animate__animated animate__fadeInDown">Sassy Nutrition Portfolio</h1>
-  </header>
-  <nav>
-    <a href="#about" class="animate__animated animate__fadeInUp">About</a>
-    <a href="#services" class="animate__animated animate__fadeInUp">Services</a>
-    <a href="#work" class="animate__animated animate__fadeInUp">Work</a>
-    <a href="#contact" class="animate__animated animate__fadeInUp">Contact</a>
-  </nav>
-  <main>
-    <section id="about" class="animate__animated animate__fadeInUp">
-      <h2>About Me</h2>
-      <p>Introduce yourself and your expertise in the field of nutrition.</p>
-    </section>
-    <section id="services" class="animate__animated animate__fadeInUp">
-      <h2>Services</h2>
-      <ul>
-        <li>List the services you offer related to nutrition</li>
-        <li>Meal planning</li>
-        <li>Nutritional counseling</li>
-        <li>etc.</li>
-      </ul>
-    </section>
-    <section id="work" class="animate__animated animate__fadeInUp">
-      <h2>My Work</h2>
-      <p>Showcase your previous work, case studies, or client testimonials.</p>
-    </section>
-    <section id="contact" class="animate__animated animate__fadeInUp">
-      <h2>Contact Me</h2>
-      <form>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2023 Sassy Nutrition Portfolio. All rights reserved.</p>
-  </footer>
-
-  <!-- Add animation script -->
-  <script>
-    window.addEventListener('load', () => {
-      const animatedElements = document.querySelectorAll('.animate__animated');
-      animatedElements.forEach((element) => {
-        element.classList.add('animate__animated');
-      });
-    });
-  </script>
-</body>
+<!doctype html>
+<html lang=en>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv=x-ua-compatible content="ie=edge">
+        <title>CoHub Hugo - Jamstack Themes</title>
+        <meta name=viewport content="width=device-width,initial-scale=1">
+        <link rel=canonical href=/demo/theme/hugo-cohub/>
+        <meta property="og:title" content="CoHub Hugo">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="/demo/theme/hugo-cohub/">
+        <meta property="og:description" content="coHub is a simple, minimal and responsive Portfolio Hugo Theme. coHub is well organized, well-formatted and named accordingly so it’s easy to change any and all of the design. coHub is built with Bootstrap 4.5. You can customize it very easy to fit your needs.">
+        <meta property="og:image" content="/capture/staticmania-hugo-cohub.png">
+        <meta name=twitter:card content="summary">
+        <meta name=twitter:site content="@jamstackthemes">
+        <meta name=twitter:creator content="@jamstackthemes">
+        <link rel=stylesheet href=/css/style.min.180c3bb13a92c071a17dd3dbfe3a0b9e52afd7e55ebf50cde86685093921969a.css>
+        <link rel=icon type=image/png sizes=32x32 href=/images/favicon/favicon-32x32.png>
+        <link rel=icon type=image/png sizes=16x16 href=/images/favicon/favicon-16x16.png>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RKDLYJ4XTH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-RKDLYJ4XTH');
+        </script>
+    </head>
+    <body class="page page-theme-single-demo">
+        <div class=demo>
+            <div class=container>
+                <div class="logo d-none d-md-block">
+                    <a href=/ title="Jamstack Themes">Jamstack Themes</a>
+                </div>
+                <div class=demo-heading>
+                    <h1 class=demo-title>CoHub Hugo</h1>
+                    <div class="theme-tags d-none d-lg-block">
+                        <a class=icon href=/ssg/hugo/ title=Hugo>
+                            <img width=20 height=20 alt=Hugo src=/images/icons/hugo.svg>
+                        </a>
+                        <a class=icon href=/css/bootstrap/ title=Bootstrap>
+                            <img width=20 height=20 alt=Bootstrap src=/images/icons/bootstrap.svg>
+                        </a>
+                    </div>
+                </div>
+                <div class=action-buttons>
+                    <a class="action-button action-button-outline action-button-info" href=/theme/hugo-cohub/>Theme Info</a>
+                    <a class="action-button action-button-outline action-button-github d-none d-md-block" data-action=github data-context=demo data-name="CoHub Hugo" href=https://github.com/StaticMania/hugo-cohub target=_blank rel="nofollow noopener">Github</a>
+                </div>
+            </div>
+        </div>
+        <iframe class=iframe-preview width=100% src=https://cohub.staticmania.com/></iframe>
+        <script type=text/javascript src=/js/scriptsBundle.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js></script>
+        <script async id="netlify-rum-container" src="/.netlify/scripts/rum" data-netlify-rum-site-id="30b34e6f-8cb3-4de3-af74-87b76f61f3a4" data-netlify-deploy-branch="master" data-netlify-deploy-context="production" data-netlify-cwv-token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaXRlX2lkIjoiMzBiMzRlNmYtOGNiMy00ZGUzLWFmNzQtODdiNzZmNjFmM2E0IiwiYWNjb3VudF9pZCI6IjViZDRlZTE2NzkyZjg5MDFhZjFlMWQ5YSIsImRlcGxveV9pZCI6IjY2MjhkYWVkNWY0YjU0MDAwODdhYzY1MSIsImlzc3VlciI6Im5mc2VydmVyIn0.hMo506r_m_jLT0nu9SvFCY9Pv67LRPEUw57uQe29If4"></script>
+    </body>
 </html>
